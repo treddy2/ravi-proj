@@ -1,0 +1,26 @@
+create database HPS
+
+create table H_USER_TAB(FIRST_NAME varchar(70),LAST_NAME varchar(70),MAIL_ID varchar(210) NOT NULL PRIMARY KEY,H_PASSWORD varchar(70),H_ADDRESS varchar(210),H_COUNTRY varchar(70),MOBILE_NUMBER varchar(70),USER_ROLE varchar(50),CREATED_DATE varchar(70),MODIFIED_DATE varchar(70));
+
+create table H_TECHNOLOGIES(TECH_NAME varchar(225) NOT NULL PRIMARY KEY,TECH_SUBAREAS text,CREATED_DATE varchar(70),MODIFIED_DATE varchar(70));
+
+create table MNCS_COMPANIES(MNCS_TYPE varchar(225) NOT NULL PRIMARY KEY,MNCS_NAME text,CREATED_DATE varchar(70),MODIFIED_DATE varchar(70));
+
+Insert Technologies and Tier-1,Tier-2 and Tier-3 based companies
+
+========================
+Technologies
+===================================================================================================================
+Field service lightning|service cloud(20),apex(20),trigger(20),lwc(10),lightning(10),visualforce page(20)
+Google cloud platform|compute engine(10),storage(10),admin(5),development(5),ai(10),big query(5),data flow(5),data table(5),cloud sql(5),app enginee(5),kubernties engine(5),cloud functions(5),pub-sub(5),logging(5),cloud compute(5),appizee(5),fire base(5)
+Hadoop|spark sql(15),spark streaming(15),spark(10),oozi(5),zookeeper(5),hdfs(10),flink(10),hive(20),pig(5),map reduce(5)
+Java|servlets(5),jsf(5),jboss(5),netbeans(3),eclipse(7),core java(10),spring(10),ejb(10),hibernate(5),spring boot(10),spring mvc(10),spring cloud(10),tomcat(10)
+
+=======================
+Company names
+====================================================================================
+Tier-1(12)|infinite Computer solutions,Oracle,Tata Consultancy Services Ltd,tcs,techmahindra,wipro,hcl,infosys,cts,csc,tvs,aligies,siemens,crown technologies,astrazenca,sonata,birlasoft,capital one,capital first,zeroda,kotak mahindra,hdfc,icici bank,cisco
+Tier-2(6)|igate,Artech Infosystems Pvt. Ltd,BizEE Technologies Pvt. Ltd,IBM India Pvt Ltd,accenture,cognizant,google,amazon,azure,sap,harmon technologies,xerox,benz,micorsoft,indian bank,techzig
+Tier-3(7)|carrernet solutions,IkYA,Huawei Technologies,ananta cybernet technologies,SyenaInfoSoft India Pvt.Ltd,Johnson Controls,Interfiber Networks,act fibernet,C-Edge Tech,nomura Research Institute Financial Technologies India Pvt Ltd,Quarks Technosoft Pvt Ltd,jellyfish technologies,shootzu,vk technologies,anju software,nokia,vfsglobal,FUJITSU CONSULTING INDIA,ivtl infoview technologies,vaken technologies,experis,e2z source,ibm,citi bank,anz,generic electric,teamware technologies,hp technologies,dell,delloite,bosch,sony,samsung
+
+===========================================================================================
