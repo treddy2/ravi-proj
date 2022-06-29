@@ -1,0 +1,216 @@
+{% extends 'home.html' %}
+
+{% block head %}
+
+<style>
+.city {
+  background-color: #D0D3D4;
+  color: black;
+  border: 1px solid black;
+}
+table, th, td {
+  border: 1px solid black;
+
+}
+th, td {
+  padding: 5px;
+  text-align: left;
+}
+</style>
+<script>
+$(document).ready(function(){
+  $('#my_modal').on('show.bs.modal', function(e) {
+  var skillsId = $(e.relatedTarget).data('book-id');
+  $(e.currentTarget).find('textarea[name="skillsId"]').val(skillsId);
+});
+});
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function(){
+  $('#btnSubmit').click(function() {
+    $('#myAlert').show('fade');
+
+    setTimeout(function () {
+      $('#myAlert').hide('fade');
+    }, 2000);
+  });
+  $('#alertClose').click(function() {
+    $('#myAlert').hide('fade');
+  });
+});
+
+$(document).ready(function(){
+  $('#btnSubmit3').click(function() {
+    $('#myAlert3').show('fade');
+
+    setTimeout(function () {
+      $('#myAlert3').hide('fade');
+    }, 2000);
+  });
+  $('#alertClose3').click(function() {
+    $('#myAlert3').hide('fade');
+  });
+});
+</script>
+{% endblock %}
+
+{% block body %}
+<!--<div class="container pt-6">
+    <div class="row">
+        <div class="col" style="background-color:#D0D3D4;"><b>Config Technologies and sub-areas</b></div>
+    </div>
+</div>-->
+<div class="container pt-4" style="min-height:100% width:80%">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                aria-hidden="true">×</span>
+        </button>
+        {{message}}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+</div>
+<div class="container pt-5">
+    {% if error %}
+    <div id="myAlert" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error : </strong> {{ error }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endif %}
+</div>
+<div class="container pt-4">
+    {% if success %}
+    <div id="myAlert1" class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong> Success : </strong> {{ success }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endif %}
+</div>
+<br>
+<div class="container pt-2 city" style="background-color:#2AD9F4;">
+    <div class="row">
+        <div class="col">
+            <form method="post" action="configmncs">
+                <div class="form-group">
+                    <label for="textarea3"><b>Multi National Companies</b></label>
+                    <textarea class="form-control" id="textarea3" rows="6" name="mncs"></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="submit" name="Save Company's" class="btn btn-dark btn-md" value="Save Company's    "
+                           id="btnSubmit3">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col" style="background-color:#2AD9F4;"><b>Available Multi National companies</b></div>
+    </div>
+    <div class="row">
+        <div class="col table-responsive">
+            <table style="width:100%">
+                <tr>
+                    <th>Company Types</th>
+                    <th colspan="18">Company Names</th>
+                </tr>
+                {% for key,val in techcomp.items() %}
+                <tr>
+                    <td><b><a href="#my_modal" class="text-body" data-toggle="modal"
+                              data-book-id="{{ key }}|{% for x,y in val.items() %} {{  y }}, {% endfor %}">{{
+                        key }}</a></b>
+                    </td>
+                    {% for x,y in val.items() %}
+                    <td>
+                        {{ y }}
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+<br>
+
+<div class="container pt-2 city" style="background-color:#2AD9F4;">
+    <div class="row">
+        <div class="col">
+            <form method="post" action="configskills">
+                <div class="form-group">
+                    <label for="textarea"><b>Technologies and sub areas</b></label>
+                    <textarea class="form-control" id="textarea" rows="6" name="skills"></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="submit" name="Save Technologies" class="btn btn-dark btn-md"
+                           value="Save Technologies" id="btnSubmit">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col" style="background-color:#2AD9F4;"><b>Available Technologies and Sub-Areas</b></div>
+    </div>
+
+    <div class="row">
+        <div class="col table-responsive">
+            <table>
+                <tr>
+                    <th>Technologies/Areas</th>
+                    <th colspan="18">Sub-Areas</th>
+                </tr>
+                {% for key,val in tech_subareas.items() %}
+                <tr>
+                    <td><b><a href="#my_modal" class="text-body" data-toggle="modal"
+                              data-book-id="{{ key }}|{% for x,y in val.items() %} {{  y }}, {% endfor %}">{{
+                        key }}</a></b>
+                    </td>
+                    {% for x,y in val.items() %}
+                    <td>
+                        {{ y }}
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+<!--Modal -->
+<div class="modal fade" id="my_modal" role="dialog">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <form method="post" action="up_del_modal">
+                <div id="config1">
+                    <div class="container pt-4" style="background-color:#2AD9F4;">
+                        <div class="form-group">
+                            <label for="textarea"><b>Technologies and sub areas</b></label>
+                            <textarea class="form-control" id="textarea1" rows="3" name="skillsId"></textarea>
+                        </div>
+                        <div class="form-group" style="background-color:#2AD9F4;">
+                            <input type="submit" name="Update" class="btn btn-dark btn-md" value="Update">
+                            <input type="submit" name="Delete" class="btn btn-dark btn-md" value="Delete" formaction="/deletemncs">
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+            <div class="modal-footer" style="background-color:#2AD9F4;">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

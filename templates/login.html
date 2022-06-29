@@ -1,0 +1,55 @@
+{% extends 'home.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="container pt-2">
+        {% if error %}
+        <div id="myAlert" class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Error : </strong> {{ error }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endif %}
+    </div>
+    <div class="container pt-6" style="background-color: black;">
+        <div class="row">
+
+            <div class="col-md-4">
+                <div class="container pt-4">
+                    <div id="login-row" class="row">
+                        <div id="login-column" class="col-md-8">
+                            <div id="login-box" class="col-md-18">
+                                <form id="login-form" class="form" action="loginuser" method="POST">
+                                    <div class="form-group">
+                                        <label for="email" class="text-info">Email:</label><br>
+                                        <input type="email" name="email" id="email" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password" class="text-info">Password:</label><br>
+                                        <input type="password" name="password" id="password" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="remember-me" class="text-info"><span>Remember me</span> <span><input
+                                                id="remember-me" name="remember-me" type="checkbox"></span></label><br>
+                                        <input type="submit" name="submit" class="btn btn-info btn-md" value="Sign-in">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <img src="/static/img/psout4.png" width="740" height="330">
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+{% endblock %}

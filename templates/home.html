@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<head>
+    <title>
+        Profile Screening
+    </title>
+    <link rel="icon" href="/static/img/RS.PNG" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script language="JavaScript" type="text/javascript" src="/static/js/jquery.js"></script>
+    <!--<script language="JavaScript" type="text/javascript"
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
+    <link href="/static/css/style1.css" rel="stylesheet" />
+    <!--<script src="/static/js/app.js"></script> -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <script language="JavaScript" type="text/javascript" src="/static/js/bootstrap.js"></script>
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script language="JavaScript" type="text/javascript"
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+    <script language="JavaScript" type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script language="JavaScript" type="text/javascript"
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script language="JavaScript" type="text/javascript" src="/static/js/custom.js"></script>
+    <script language="JavaScript" type="text/javascript" src="/static/js/jsscrolltable.js"></script>
+    <link href="/static/css/sticky-footer-navbar.css" rel="stylesheet">
+    <link href="/static/css/csscrolltable.css" rel="stylesheet">
+
+    <!--<script>
+$(document).ready(function(){
+  $('#my_modal').on('show.bs.modal', function(e) {
+  var skillsId = $(e.relatedTarget).data('book-id');
+  alert(skillsId)
+
+  $(e.currentTarget).find('textarea[name="skillsId"]').val(skillsId);
+});
+});
+    </script>-->
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+.btn {
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  padding: 6px 15px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+/* Darker background on mouse-over */
+.btn:hover {
+  background-color: RoyalBlue;
+}
+
+    </style>
+
+    {% block head %}{% endblock %}
+</head>
+<body>
+<header>
+    <!-- Fixed navbar -->
+
+    <div class="container">
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active"><a class="nav-link" style="color:white"
+                                                   href="/">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item" id="skillsconfig"><a class="{{ conf }}" style="color:white"
+                                                              href="/skillsconfig">Configure</a>
+                    </li>
+                    <li class="nav-item"><a class="{{ conf }}" href="/login" style="color:white">Reports</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="{{ dropdown_toggle }} {{ conf_link }} " href="#" id="navbardrop"
+                           data-toggle="dropdown"
+                           style="color:white">
+                            {{sign_user}}
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="#my_modal1" class="text-body" data-toggle="modal" class="dropdown-item"> Your
+                                Account</a>
+                            <a class="dropdown-item" href="/signout">Sign Out</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login" style="color:white">
+                            {% if login %}
+                            {% set login_val = "" %}
+                            {% else %}
+                            Login
+                            {% endif %}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/signup" style="color:white">
+                            {% if login %}
+                            {% set login_val = "" %}
+                            {% else %}
+                            Sign-up
+                            {% endif %}</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+</header>
+{% block body %}
+
+
+{% endblock %}
+
+{% block content %}
+
+<!--Modal -->
+<div class="modal fade" id="my_modal1" role="dialog">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <form method="post" action="up_del_user">
+                <div id="config1">
+                    <!-- Modal body {% for x in user_data %} {{ x }}, {% endfor %}-->
+                    <div class="modal-body">
+
+                        <table class="table table-borderless table-warning">
+                            <thead>
+                            <tr>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Mail-Id</th>
+                                <th scope="col">Phone Number</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Country</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                {% for x in user_data %}
+                                <td>{{ x }}</td>
+                                {% endfor %}
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">HCL Technologies @ 2020</div>
+        <div class="panel-body"></div>
+    </div>
+</div>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script>
+$(document).ready(function(){
+  $(".nav-tabs a").click(function(){
+    $(this).tab('show');
+  });
+});
+
+
+
+
+
+</script>
+</body>
+</html>

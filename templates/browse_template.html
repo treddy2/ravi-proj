@@ -1,0 +1,82 @@
+{% extends 'home.html' %}
+{% block head %}
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#fileNames").change(function() {
+    var relPath = "../Resumes/"
+    var sourceVal = document.getElementById("fileNames").files[0].webkitRelativePath;
+    var sourceDirectry = sourceVal.substr(0, sourceVal.lastIndexOf("/"))
+    var pathDirectory = relPath.concat(sourceDirectry);
+    $("#sourceDirPath").val(pathDirectory);
+  });
+});
+</script>
+<script>
+$(document).ready(function(){
+  alert("yup");
+  var form = $("my-form")
+  $("#rsubmit").on("click",function() {
+    alert("step-1");
+    $.ajax({
+        type: form.attr("method"),
+        url: form.attr("action"),
+        data: form.serialize(),
+
+        beforeSend: function(){
+        $("#loader").show();
+        },
+        complete: function(){
+        $("#loader").hide();
+        },
+        success: function(){
+          $("#result").html("Data fetched successfully");
+        },
+        error: function(){
+          $("#result").html("Failed to fetch data");
+        }
+    });
+  });
+});
+</script>
+{% endblock %}
+{% block body %}
+<div class="container pt-6">
+    <form id=my-form" class="md-form" method="POST" action="profile" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col"><p style="color:black"><b>Profile Location :</b></p></div>
+            <div class="col">
+                <div class="custom-file">
+                    <!--<input type="file" webkitdirectory multiple name="fileNames" class="custom-file-input"
+                           id="fileNames" required dir="auto">
+                    <label class="custom-file-label" for="fileNames" id="sourceDirPath"><i
+                            class="fa fa-folder-open-o"></i>
+                    </label> -->
+                    <input type="text" id="sourceDirPath" class="myInput" disabled/>
+                    <input type="file" name="fileNames" accept=".pdf,.docx" id="fileNames" class="inputfile"
+                           multiple/>
+                    <label for="fileNames"><i class="fa fa-folder-open-o"></i>&nbsp</label>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="form-group">
+                            <h4>Ajax preloader</h4>
+                            <input id="rsubmit" type="submit" name="Submit" class="btn btn-dark btn-md" value="Start Screening">&nbsp&nbsp&nbsp&nbsp&nbsp
+                            <div id="loader" style="margin-top:20px; display:none">
+                                <img src="/static/img/ajax-loader-grn.gif">
+                            </div>
+                            <div id="result"></div>
+                            <input type="submit" name="Submit" class="btn btn-dark btn-md" value="Clear"
+                                   formaction="/clear">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

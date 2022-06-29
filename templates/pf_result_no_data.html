@@ -1,0 +1,140 @@
+{% extends 'home.html' %}
+
+{% block head %}
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#fileNames").change(function() {
+    var relPath = "../Resumes/"
+    var sourceVal = document.getElementById("fileNames").files[0].webkitRelativePath;
+    var sourceDirectry = sourceVal.substr(0, sourceVal.lastIndexOf("/"))
+    var pathDirectory = relPath.concat(sourceDirectry);
+    $("#sourceDirPath").val(pathDirectory);
+  });
+});
+
+
+</script>
+
+{% endblock %}
+
+{% block body %}
+
+
+<div class="container pt-6">
+    <div class="row">
+        <div class="col" style="background-color:#D0D3D4;"><b>Profile Screening</b></div>
+    </div>
+</div>
+<div class="container pt-2">
+    <form class="md-form" method="POST" action="profile" enctype="multipart/form-data">
+        <br>
+        <div class="row">
+            <div class="col"><p style="color:black"><b>Technology Area :</b></p></div>
+            <div class="col">
+                <select class="custom-select" required name="technologies" id="technologies">
+                    <option value="select" disabled="true">Select Technologies</option>
+                    {% for p in areas_subareas %}
+                    <option>
+                        {{ p }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col"><p style="color:black"><b>Profile Location :</b></p></div>
+            <div class="col">
+                <div class="custom-file">
+                    <!--<input type="file" webkitdirectory multiple name="fileNames" class="custom-file-input"
+                           id="fileNames" required dir="auto">
+                    <label class="custom-file-label" for="fileNames" id="sourceDirPath"><i
+                            class="fa fa-folder-open-o"></i>
+                    </label> -->
+                    <input type="text" id="sourceDirPath" class="myInput" disabled/>
+                    <input type="file" name="fileNames" accept=".pdf,.docx" id="fileNames" class="inputfile" webkitdirectory multiple />
+                    <label for="fileNames"><i class="fa fa-folder-open-o"></i>&nbsp</label>
+
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col"><p style="color:black"><b>Number of files screened :</b></p></div>
+            <div class="col">
+                <fieldset disabled>
+                    <div class="form-group">
+                        <label>{{filesCount}}</label>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="form-group">
+                            <input type="submit" name="Submit" class="btn btn-dark btn-md" value="Start Screening" >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <form class="md-form" method="GET" action="clear" enctype="multipart/form-data">
+        <input type="submit" name="Submit" class="btn btn-dark btn-md" value="Clear">
+    </form>
+</div>
+
+<div class="container pt-2">
+    <div class="row">
+        <div class="col">
+            <table class="table table-sm table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th style="white-space:nowrap;background-color:#D0D3D4">{{ rsrc_name }}</th>
+                    <th style="white-space:nowrap;background-color:#D0D3D4">{{ rsrc_rank }}</th>
+                    {% for skills in tech_skill_org %}
+                    <th style="white-space:nowrap;background-color:#D0D3D4">{{ skills }}</th>
+                    {% endfor %}
+                     {% for tier in tier_companies %}
+                    <th style="white-space:nowrap;background-color:#D0D3D4">{{ tier }}</th>
+                    {% endfor %}
+                </tr>
+
+                </thead>
+                <tbody>
+                {% for i in temp_dict_list %}
+                <tr>
+                    {% for candKey,candVal in i["Candidate Name"].items() %}
+                    <td>{{ candVal}}</td>
+                    {% endfor %}
+                    {% for candRval in i["Candidate Rank"]  %}
+                    <td>{{ candRval}}</td>
+                    {% endfor %}
+                    {% for keywordAskeys,countAsval in i['Keywods Count'].items() %}
+                    <td>{{ countAsval }}</td>
+                    {% endfor %}
+                    {% for vt1 in i["Tier-1"]  %}
+                    <td>{{ vt1 }}</td>
+                    {% endfor %}
+                    {% for vt2 in i["Tier-2"]  %}
+                    <td>{{ vt2 }}</td>
+                    {% endfor %}
+                    {% for vt3 in i["Tier-3"]  %}
+                    <td>{{ vt3 }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<div>
+            <img src="{{ profile_pic1 }}">
+</div>
+{% endblock %}
