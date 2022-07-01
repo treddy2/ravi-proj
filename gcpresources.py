@@ -5,7 +5,6 @@ import tempfile
 from google.cloud import storage, bigquery
 
 
-#def gcp_config(key_file):
 def gcp_config():
     #storage_client = storage.Client.from_service_account_json('gcp-serviceaccounts/psapp-309910-key.json')
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "gcp-serviceaccounts/psapp.json"
@@ -28,9 +27,9 @@ def gcp_strg_bucket_list():
     return z
 
 
-def upload_files_gcp(source_files,profiles_bucket,key_file):
+def upload_files_gcp(source_files,profiles_bucket):
     b = []
-    storage_client = gcp_strg_client(key_file)
+    storage_client = gcp_strg_client()
     bucket = storage_client.bucket(profiles_bucket)
     for y in source_files:
         try:
