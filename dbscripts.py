@@ -4,13 +4,11 @@ import re
 import mysql
 from flask import request, session
 
-import cloudsqldbcon
 import dbcon
 import datetime
 import pandas as pd
 import base64
 
-import gcpcloudmysql
 
 
 def current_date():
