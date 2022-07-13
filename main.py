@@ -99,10 +99,6 @@ def userdetails():
     usr_data.append(couNtry)
     return usr_data
 
-@app.route('/hello')
-def hello_world():
-    target = os.environ.get('TARGET', 'Ravindra nath')
-    return 'Hello {}!\n'.format(target)
 
 @app.route('/')
 def home():

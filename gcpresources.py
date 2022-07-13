@@ -7,7 +7,7 @@ from google.cloud import storage, bigquery
 
 def gcp_config():
     #storage_client = storage.Client.from_service_account_json('gcp-serviceaccounts/psapp-309910-key.json')
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "gcp-serviceaccounts/psapp.json"
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "psapp.json"
     #os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = key_file
 
 
